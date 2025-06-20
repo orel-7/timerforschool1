@@ -1,0 +1,90 @@
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טיימרים עד לחופש הגדול</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            direction: rtl;
+        }
+        .timer {
+            font-size: 24px;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 32px;
+            color: #333;
+        }
+        h2 {
+            font-size: 28px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>טיימרים עד לחופש הגדול</h1>
+
+    <div class="timer">
+        <h2>בתי ספר יסודיים:</h2>
+        <p id="timer-elementary"></p>
+    </div>
+
+    <div class="timer">
+        <h2>חטיבות ביניים ותיכונים:</h2>
+        <p id="timer-middle-high"></p>
+    </div>
+
+    <script>
+        function calculateTimeRemaining(endDate) {
+            const now = new Date().getTime();
+            const timeLeft = endDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            return { days, hours, minutes, seconds };
+        }
+
+        function updateTimer(timerId, endDate) {
+            const timerElement = document.getElementById(timerId);
+            const interval = setInterval(() => {
+                const { days, hours, minutes, seconds } = calculateTimeRemaining(endDate);
+
+                if (days < 0) {
+                    clearInterval(interval);
+                    timerElement.innerHTML = "החופש הגדול התחיל!";
+                } else {
+                    timerElement.innerHTML = `${days} ימים, ${hours} שעות, ${minutes} דקות, ${seconds} שניות`;
+                }
+            }, 1000);
+        }
+
+        // תאריך היום
+        const today = new Date();
+
+        // תאריכים לחופש הגדול ב-2025
+        const elementaryEndDate = new Date("June 30, 2025 00:00:00").getTime();
+        const middleHighEndDate = new Date("June 20, 2025 00:00:00").getTime();
+
+        // אם היום הוא אחרי החופש הגדול של 2024, מחשבים לשנת 2025
+        if (today > new Date("June 30, 2024 00:00:00")) {
+            updateTimer("timer-elementary", elementaryEndDate);
+        } else {
+            updateTimer("timer-elementary", new Date("June 30, 2024 00:00:00").getTime());
+        }
+
+        if (today > new Date("June 20, 2024 00:00:00")) {
+            updateTimer("timer-middle-high", middleHighEndDate);
+        } else {
+            updateTimer("timer-middle-high", new Date("June 20, 2024 00:00:00").getTime());
+        }
+    </script>
+
+</body>
+</html>

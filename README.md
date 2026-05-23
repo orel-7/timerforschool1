@@ -1,7 +1,7 @@
 # ⏰ Timer For School - Israel Edition
 
 <p align="center">
-  <img src="PUT-YOUR-IMAGE-LINK-HERE" alt="Timer For School Banner" width="850">
+  <img src="image.png" alt="Timer For School Banner" width="850">
 </p>
 
 A modern and simple school timer made for students in Israel 🇮🇱📚  
